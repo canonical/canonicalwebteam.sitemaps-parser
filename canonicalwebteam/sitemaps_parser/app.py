@@ -123,7 +123,7 @@ def get_extended_copydoc(path, base):
     with base.joinpath(path).open("r") as f:
         file_data = f.read()
         if match := re.search(
-            "\{\% block meta_copydoc *\%\}(.*)\{\%( *)endblock", file_data
+            r"\{\% block meta_copydoc *\%\}(.*)\{\%( *)endblock", file_data
         ):
             return match.group(1)
 

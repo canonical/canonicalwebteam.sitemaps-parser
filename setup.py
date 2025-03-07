@@ -3,13 +3,14 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="canonicalwebteam.parser",
-    version="1.0.0",
+    name="canonicalwebteam.sitemaps-parser",
+    version="1.0.1",
     author="Canonical webteam",
     author_email="webteam@canonical.com",
-    url="https://github.com/canonical/canonicalwebteam.parser",
+    url="https://github.com/canonical/canonicalwebteam.sitemaps-parser",
     description=(
-        "Flask extension to parse websites and extract structured data"
+        "Flask extension to parse websites and extract structured data to "
+        "build sitemaps."
     ),
     packages=find_packages(),
     long_description=open("README.md").read(),
