@@ -7,7 +7,7 @@ Install the project with pip: `pip install canonicalwebteam.sitemaps-parser`
 You can add the extension on your project by doing the following:
 
 ```
-from canonicalwebteam.sitemaps-parser import scan_directory
+from canonicalwebteam.sitemaps_parser import scan_directory
 
 node = scan_directory("<example-templates-path>)
 ```
