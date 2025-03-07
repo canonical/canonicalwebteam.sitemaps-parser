@@ -13,3 +13,14 @@ node = scan_directory("<example-templates-path>)
 ```
 
 `node` will return a tree of all the templates given in the `<example-templates-path>
+
+## Local development
+
+### Linting and formatting
+
+Tests can be run with Tox:
+```
+pip3 install tox  # Install tox
+tox -e lint       # Check the format of Python code
+tox -e format     # Reformat the Python code
+```
