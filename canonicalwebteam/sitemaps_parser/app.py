@@ -1,4 +1,6 @@
 import re
+import os
+from datetime import datetime
 from contextlib import suppress
 from pathlib import Path
 
@@ -245,6 +247,7 @@ def create_node():
         "description": None,
         "link": None,
         "children": [],
+        "last_modified": None,
     }
 
 
@@ -277,6 +280,11 @@ def scan_directory(path_name, base=None):
             # Get tags, add as child
             tags = get_tags_rolling_buffer(index_path)
             node = update_tags(node, tags)
+            # Add last modified time for index.html
+            lastmod_time = os.path.getmtime(index_path)
+            node["last_modified"] = datetime.fromtimestamp(
+                lastmod_time
+            ).strftime("%Y-%m-%dT%H:%M:%SZ")
 
     # Cycle through other files in this directory
     for child in node_path.iterdir():
@@ -292,6 +300,12 @@ def scan_directory(path_name, base=None):
                     child_tags["link"] = get_extended_copydoc(
                         extended_path, base=base
                     )
+                # Add last modified time for child paths
+                lastmod_time = os.path.getmtime(child)
+                child_tags["last_modified"] = datetime.fromtimestamp(
+                    lastmod_time
+                ).strftime("%Y-%m-%dT%H:%M:%SZ")
+
                 node["children"].append(child_tags)
         # If the child is a directory, scan it
         if child.is_dir():
