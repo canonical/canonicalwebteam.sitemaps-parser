@@ -1,3 +1,4 @@
+import flask
 import re
 import subprocess
 from contextlib import suppress
@@ -264,6 +265,22 @@ def get_git_last_modified_time(path):
         return result.stdout.strip()
     except subprocess.CalledProcessError:
         return None
+
+
+def generate_sitemap(directory_path, base_url):
+    """
+    Generate sitemap given a directory path and a base url. It uses the
+    local project's templates to generate the sitemap.
+
+    TODO: Include sitemap_template.xml in the directory_parser package
+    """
+    tree = scan_directory(directory_path)
+    xml_sitemap = flask.render_template(
+        "/sitemap_template.xml",
+        tree=tree["children"],
+        base_url=base_url,
+    )
+    return xml_sitemap
 
 
 def scan_directory(path_name, base=None):
