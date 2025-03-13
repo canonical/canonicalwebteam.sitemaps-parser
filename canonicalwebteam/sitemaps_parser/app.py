@@ -1,4 +1,5 @@
 import re
+import subprocess
 from contextlib import suppress
 from pathlib import Path
 
@@ -245,7 +246,24 @@ def create_node():
         "description": None,
         "link": None,
         "children": [],
+        "last_modified": None,
     }
+
+
+def get_git_last_modified_time(path):
+    """
+    Get the last modified time of a file using Git metadata.
+    """
+    try:
+        result = subprocess.run(
+            ["git", "log", "-1", "--format=%cI", str(path)],
+            capture_output=True,
+            text=True,
+            check=True,
+        )
+        return result.stdout.strip()
+    except subprocess.CalledProcessError:
+        return None
 
 
 def scan_directory(path_name, base=None):
@@ -277,6 +295,10 @@ def scan_directory(path_name, base=None):
             # Get tags, add as child
             tags = get_tags_rolling_buffer(index_path)
             node = update_tags(node, tags)
+            # Add last modified time for index.html
+            lastmod_time = get_git_last_modified_time(index_path)
+            if lastmod_time:
+                node["last_modified"] = lastmod_time
 
     # Cycle through other files in this directory
     for child in node_path.iterdir():
@@ -292,6 +314,11 @@ def scan_directory(path_name, base=None):
                     child_tags["link"] = get_extended_copydoc(
                         extended_path, base=base
                     )
+                # Add last modified time for child paths
+                child_lastmod_time = get_git_last_modified_time(child)
+                if child_lastmod_time:
+                    child_tags["last_modified"] = child_lastmod_time
+
                 node["children"].append(child_tags)
         # If the child is a directory, scan it
         if child.is_dir():
