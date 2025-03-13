@@ -1,13 +1,13 @@
-# canonicalwebteam.sitemaps-parser
+# canonicalwebteam.directory-parser
 Flask extension to parse websites and extract structured data to build sitemaps.
 
 ## Install
-Install the project with pip: `pip install canonicalwebteam.sitemaps-parser`
+Install the project with pip: `pip install canonicalwebteam.directory-parser`
 
 You can add the extension on your project by doing the following:
 
 ```
-from canonicalwebteam.sitemaps_parser import scan_directory
+from canonicalwebteam.directory_parser import scan_directory
 
 node = scan_directory("<example-templates-path>)
 ```

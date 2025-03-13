@@ -3,11 +3,11 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="canonicalwebteam.sitemaps-parser",
-    version="1.0.3",
+    name="canonicalwebteam.directory-parser",
+    version="1.1.0",
     author="Canonical webteam",
     author_email="webteam@canonical.com",
-    url="https://github.com/canonical/canonicalwebteam.sitemaps-parser",
+    url="https://github.com/canonical/canonicalwebteam.directory-parser",
     description=(
         "Flask extension to parse websites and extract structured data to "
         "build sitemaps."
