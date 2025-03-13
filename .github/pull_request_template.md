@@ -10,7 +10,7 @@
 
 If this PR contains code changes, it should contain the following changes to make sure it's ready for the release:
 
-- [ ] Package version in `setup.py` should be updated relative to the [most recent release](https://github.com/canonical/canonicalwebteam.sitemaps-parser/releases/latest)
+- [ ] Package version in `setup.py` should be updated relative to the [most recent release](https://github.com/canonical/canonicalwebteam.directory-parser/releases/latest)
 
 
 ## Issue / Card
